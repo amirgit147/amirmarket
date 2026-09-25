@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>امیر مارکت | هایپرمارکت آنلاین مواد غذایی (طرح اکالا)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e6123d; --red-dark: #cf0e35; --red-light: #fef2f3;
+      --green: #02a050; --bg: #f8f9fa; --card: #ffffff;
+      --text: #1f2937; --sub: #64748b; --border: #e5e7eb;
+      --radius: 14px;
+    }
+    body.dark-mode {
+      --bg: #0b0f19; --card: #151d32; --text: #f8fafc;
+      --sub: #94a3b8; --border: #232f48; --red-light: rgba(230,18,61,0.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; }
+    body { background: var(--bg); color: var(--text); direction: rtl; text-align: right; line-height: 1.6; font-size: 14px; transition: 0.25s ease; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 16px; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* Top Bar */
+    .top-bar { background: #111827; color: #fff; font-size: 12px; padding: 7px 0; }
+    .top-bar-inner { display: flex; justify-content: space-between; align-items: center; }
+    .pill-red { background: var(--red); color: #fff; padding: 2px 10px; border-radius: 99px; font-weight: 800; font-size: 11px; }
+
+    /* Header */
+    .header { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
+    .logo-box { display: flex; align-items: center; gap: 10px; }
+    .logo-badge { width: 48px; height: 48px; background: #000; border-radius: 12px; padding: 3px; border: 1.5px solid #ffc107; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .brand-title { font-size: 21px; font-weight: 900; line-height: 1; }
+    .loc-btn { display: flex; align-items: center; gap: 6px; background: var(--bg); border: 1px solid var(--border); padding: 8px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; color: var(--text); }
+    .search-wrap { flex: 1; max-width: 560px; position: relative; }
+    .search-input { width: 100%; height: 44px; background: var(--bg); border: 1.5px solid transparent; border-radius: 99px; padding: 0 42px 0 38px; font-size: 13px; color: var(--text); outline: none; }
+    .search-input:focus { background: var(--card); border-color: var(--red); box-shadow: 0 0 0 3px rgba(230,18,61,0.12); }
+    .search-ico { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--sub); }
+    .search-drop { position: absolute; top: calc(100% + 6px); right: 0; left: 0; background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 10px; z-index: 60; display: none; }
+    .search-drop.open { display: block; }
+    .btn-act { display: flex; align-items: center; gap: 6px; background: var(--bg); color: var(--text); padding: 8px 14px; border-radius: 99px; border: 1px solid var(--border); font-size: 12.5px; font-weight: 700; }
+    .cart-btn { display: flex; align-items: center; gap: 8px; background: var(--red); color: #fff; padding: 8px 18px; border-radius: 99px; box-shadow: 0 4px 12px rgba(230,18,61,0.3); font-weight: 800; }
+
+    /* Subheader */
+    .subnav { background: var(--card); border-top: 1px solid var(--border); padding: 6px 0; }
+    .subnav-list { display: flex; align-items: center; gap: 16px; list-style: none; overflow-x: auto; white-space: nowrap; }
+    .subnav-link { font-size: 12.5px; font-weight: 600; color: var(--sub); padding: 6px 8px; }
+    .subnav-link.fire { color: var(--red) !important; font-weight: 800; }
+
+    /* Hero */
+    .hero { padding: 20px 0 16px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 310px; gap: 18px; }
+    .carousel { position: relative; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); min-height: 330px; overflow: hidden; }
+    .slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 32px 38px; opacity: 0; visibility: hidden; transition: 0.4s ease; }
+    .slide.active { opacity: 1; visibility: visible; }
+    .btn-hero { display: inline-block; background: var(--red); color: #fff; padding: 9px 20px; border-radius: 99px; font-size: 13px; font-weight: 800; margin-top: 14px; }
+    .side-cards { display: flex; flex-direction: column; gap: 14px; }
+    .side-card { flex: 1; border-radius: var(--radius); padding: 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+    .card-pink { background: linear-gradient(135deg, #fff1f2, #ffe4e6); border: 1px solid #fecdd3; color: #9f1239; }
+    .card-blue { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; color: #1e40af; }
+    body.dark-mode .card-pink { background: #2d121c; border-color: #5b2137; color: #fda4af; }
+    body.dark-mode .card-blue { background: #101c38; border-color: #1e3a8a; color: #93c5fd; }
+
+    /* Stories */
+    .stories { padding: 12px 0 18px; }
+    .stories-row { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+    .story { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; flex-shrink: 0; }
+    .story-ring { width: 66px; height: 66px; border-radius: 50%; background: var(--card); border: 2.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 26px; transition: 0.2s; }
+    .story:hover .story-ring { border-color: var(--red); transform: translateY(-3px); }
+
+    /* Incredible Deals Red Box (Okala Style) */
+    .deals-sec { padding: 18px 0; }
+    .deals-box { background: linear-gradient(135deg, #e6123d, #b80829); border-radius: var(--radius); padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 16px; align-items: center; box-shadow: 0 10px 24px rgba(230,18,61,0.25); }
+    .deals-side { color: #fff; text-align: center; }
+    .timer-wrap { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 10px; margin: 10px 0; }
+    .timer-box { background: #fff; color: #111; padding: 4px 6px; border-radius: 5px; font-weight: 900; min-width: 36px; display: inline-block; font-size: 14px; }
+    .deals-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 6px; }
+
+    /* Catalog Layout */
+    .catalog { padding: 10px 0 36px; }
+    .catalog-layout { display: grid; grid-template-columns: 240px 1fr; gap: 18px; align-items: flex-start; }
+    .sidebar { position: sticky; top: 80px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+    .cat-btn { text-align: right; padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--sub); display: block; width: 100%; }
+    .cat-btn.active { background: var(--red-light); color: var(--red); font-weight: 800; }
+    .top-filter-bar { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .sort-pill { font-size: 12px; font-weight: 600; color: var(--sub); padding: 4px 10px; border-radius: 99px; }
+    .sort-pill.active { background: var(--red); color: #fff; font-weight: 800; }
+
+    /* Product Cards */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 14px; }
+    .deal-card { flex: 0 0 195px; }
+    .p-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; position: relative; transition: 0.2s; }
+    .p-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-color: rgba(230,18,61,0.3); }
+    .badge-disc { background: var(--red); color: #fff; font-size: 11px; font-weight: 800; padding: 2px 7px; border-radius: 99px; }
+    .img-box { width: 100%; height: 160px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 8px; overflow: hidden; }
+    body.dark-mode .img-box { background: #1e293b; }
+    .img-box img { max-width: 90%; max-height: 90%; object-fit: contain; transition: 0.3s; }
+    .p-card:hover .img-box img { transform: scale(1.08); }
+    .p-title { font-size: 13px; font-weight: 700; height: 38px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 6px; cursor: pointer; }
+    .p-price-row { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 10px; }
+    .old-p { font-size: 11px; color: var(--sub); text-decoration: line-through; }
+    .new-p { font-size: 16px; font-weight: 900; color: var(--text); }
+    .btn-add-p { width: 100%; height: 35px; background: var(--red-light); color: var(--red); border: 1.5px solid var(--red); border-radius: 8px; font-size: 12px; font-weight: 800; }
+    .btn-add-p:hover { background: var(--red); color: #fff; }
+    .qty-box { width: 100%; height: 35px; background: var(--red); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; font-weight: 900; }
+
+    /* Drawer Cart */
+    .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; visibility: hidden; transition: 0.25s; }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .drawer { position: fixed; top: 0; left: 0; bottom: 0; width: 100%; max-width: 400px; background: var(--card); z-index: 1001; display: flex; flex-direction: column; transform: translateX(-100%); transition: 0.3s; }
+    .drawer.open { transform: translateX(0); }
+    .drawer-head { display: flex; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 15px; font-weight: 800; }
+    .drawer-list { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+    .drawer-item { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--border); padding: 8px; border-radius: 8px; }
+    .drawer-thumb { width: 46px; height: 46px; border-radius: 6px; object-fit: cover; }
+    .drawer-foot { background: var(--card); border-top: 1px solid var(--border); padding: 14px 16px; }
+    .btn-order { width: 100%; height: 44px; background: var(--red); color: #fff; border-radius: 10px; font-size: 14px; font-weight: 800; margin-top: 10px; }
+
+    /* Modal */
+    .modal-wrap { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; visibility: hidden; transition: 0.2s; }
+    .modal-wrap.open { opacity: 1; visibility: visible; }
+    .modal { background: var(--card); border-radius: var(--radius); max-width: 520px; width: 100%; padding: 22px; position: relative; border: 1px solid var(--border); }
+    .modal-x { position: absolute; top: 12px; left: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+
+    /* Toast */
+    .toast-box { position: fixed; bottom: 20px; right: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
+    .toast { background: #1f2937; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 12.5px; font-weight: 600; border-right: 4px solid var(--red); }
+
+    /* Mobile Bar */
+    .mobile-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--border); z-index: 900; padding: 6px 12px; justify-content: space-around; }
+    .mob-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 600; color: var(--sub); }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-grid, .deals-box, .catalog-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      body { padding-bottom: 55px; }
+      .top-bar, .subnav, .side-cards, .hero-img-box { display: none; }
+      .header-inner { flex-wrap: wrap; }
+      .search-wrap { order: 3; max-width: 100%; }
+      .slide { grid-template-columns: 1fr; text-align: center; }
+      .mobile-bar { display: flex; }
+      .drawer { max-width: 100%; }
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div><span class="pill-red">⚡ تحویل فوری زیر ۴۵ دقیقه</span><span> هایپرمارکت آنلاین امیر مارکت | تا ۵۰٪ تخفیف شگفت‌انگیز</span></div>
+      <div>مهلت حراج: <span id="headerTimer" style="color: #fbbf24; font-weight: 800;">۰۴:۲۸:۱۵</span></div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <a href="#" class="logo-box" title="امیر مارکت">
+          <div class="logo-badge">
+            <svg viewBox="0 0 1000 850" width="100%" height="100%">
+              <defs>
+                <linearGradient id="blu" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#42a5f5"/><stop offset="100%" stop-color="#0d47a1"/></linearGradient>
+                <linearGradient id="gld" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="50%" stop-color="#ffb300"/><stop offset="100%" stop-color="#b26a00"/></linearGradient>
+              </defs>
+              <g transform="translate(40, 20)">
+                <path d="M 370 65 L 435 185 L 395 240 L 335 155 L 180 435 L 360 435 L 430 435 L 415 510 L 55 510 C 42 510, 32 495, 38 480 L 300 65 C 315 40, 350 40, 370 65 Z" fill="url(#blu)" />
+                <path d="M 330 170 L 380 270 L 225 420 Z" fill="#000" />
+                <path d="M 40 480 L 355 480 L 345 520 L 80 520 Z" fill="url(#gld)" />
+                <path d="M 105 538 L 370 538 L 355 572 L 145 572 Z" fill="url(#gld)" />
+                <path d="M 180 598 L 385 598 L 370 630 L 215 630 Z" fill="url(#gld)" />
+                <path d="M 350 490 L 770 490 C 810 490, 835 460, 860 380 L 895 270 L 845 285 L 815 385 C 800 425, 780 435, 745 435 L 410 435 L 395 510 L 745 510 C 785 510, 815 480, 835 430 Z" fill="url(#blu)" />
+                <path d="M 435 530 L 745 530 L 740 542 L 435 542 Z" fill="url(#gld)" />
+                <path d="M 865 265 L 905 235 C 920 222, 950 225, 960 240 C 965 252, 950 268, 930 268 Z" fill="url(#gld)" />
+                <polygon points="420,185 500,430 610,480 505,185" fill="url(#gld)" />
+                <path d="M 505 185 L 615 485 L 720 185 L 655 185 L 615 390 L 575 185 Z" fill="url(#gld)" />
+                <polygon points="615,485 720,185 860,185 770,485" fill="url(#gld)" />
+                <circle cx="470" cy="675" r="52" fill="url(#blu)"/><circle cx="470" cy="675" r="28" fill="url(#gld)"/>
+                <circle cx="695" cy="675" r="52" fill="url(#blu)"/><circle cx="695" cy="675" r="28" fill="url(#gld)"/>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-title"><span style="color:var(--text);">امیر</span><span style="color:var(--red);">مارکت</span></div>
+            <span style="font-size: 11px; color: var(--sub); font-weight: 600;">هایپرمارکت آنلاین مواد غذایی</span>
+          </div>
+        </a>
+        <button class="loc-btn" onclick="window.openAddr()">📍 <span id="curAddr">تهران، سعادت‌آباد</span> ▼</button>
+      </div>
+
+      <div class="search-wrap">
+        <span class="search-ico">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="جستجو بین میلیون‌ها کالا (نوتلا، بیسکویت مادر...)" autocomplete="off">
+        <div class="search-drop" id="searchDrop">
+          <div class="trends-chips">
+            <span class="chip" onclick="window.quickSearch('نوتلا')">🍫 نوتلا اصل</span>
+            <span class="chip" onclick="window.quickSearch('بیسکویت مادر')">🍪 بیسکویت مادر</span>
+            <span class="chip" onclick="window.quickSearch('شیر')">🥛 شیر کاله</span>
+            <span class="chip" onclick="window.quickSearch('برنج')">🍚 برنج طارم</span>
+          </div>
+          <div id="searchResList" style="margin-top: 8px;"></div>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button class="btn-act" id="themeBtn"><span id="themeIco">🌙</span> <span id="themeTxt">حالت شب</span></button>
+        <button class="cart-btn" onclick="window.openCart()">
+          🛒 <span id="hCartTotal">۰ تومان</span> (<span id="hCartCount">۰</span>)
+        </button>
+      </div>
+    </div>
+
+    <nav class="subnav">
+      <div class="container">
+        <ul class="subnav-list">
+          <li><a href="#productsCatalog" class="subnav-link" style="font-weight: 800;">☰ دسته‌بندی کالاها</a></li>
+          <li><a href="#incredibleDeals" class="subnav-link fire">🔥 پیشنهاد شگفت‌انگیز</a></li>
+          <li><a href="#productsCatalog" class="subnav-link" onclick="window.filterCat('snacks')">🍫 نوتلا و تنقلات</a></li>
+          <li><a href="#productsCatalog" class="subnav-link" onclick="window.filterCat('dairy')">🥛 لبنیات و پنیر</a></li>
+          <li><a href="#productsCatalog" class="subnav-link" onclick="window.filterCat('grocery')">🍚 خواربار و برنج</a></li>
+          <li><a href="#productsCatalog" class="subnav-link" onclick="window.filterCat('drinks')">☕ چای و نوشیدنی</a></li>
+          <li><a href="#productsCatalog" class="subnav-link" onclick="window.filterCat('hygiene')">🧴 شوینده و بهداشتی</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="carousel">
+          <div class="slide active">
+            <div>
+              <span class="pill-red">هایپرمارکت آنلاین امیر مارکت</span>
+              <h1 style="font-size: 24px; font-weight: 900; margin: 10px 0;">میلیون‌ها کالای سوپرمارکتی با تخفیف تا ۵۰٪</h1>
+              <p style="color:var(--sub); font-size:13.5px;">خرید نوتلا اصل، بیسکویت مادر مینو، کاله، روژین، بهار با تضمین تازگی تاریخ روز</p>
+              <a href="#incredibleDeals" class="btn-hero">خرید با تخفیف شگفت‌انگیز</a>
+            </div>
+            <div class="hero-img-box"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600" style="border-radius:12px; height:240px; width:100%; object-fit:cover;"></div>
+          </div>
+          <div class="slide">
+            <div>
+              <span class="pill-red" style="background:#d97706;">صبحانه پرانرژی</span>
+              <h2 style="font-size: 24px; font-weight: 900; margin: 10px 0;">شکلات صبحانه نوتلا و فرمند با ضمانت اصالت</h2>
+              <p style="color:var(--sub); font-size:13.5px;">لذت فندق طبیعی و شکلات خالص ایتالیایی نوتلا با بهترین قیمت بازار</p>
+              <button class="btn-hero" onclick="window.filterCat('snacks')">سفارش نوتلا</button>
+            </div>
+            <div class="hero-img-box"><img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600" style="border-radius:12px; height:240px; width:100%; object-fit:cover;"></div>
+          </div>
+          <div class="slide">
+            <div>
+              <span class="pill-red" style="background:#059669;">نوستالژی ماندگار</span>
+              <h2 style="font-size: 24px; font-weight: 900; margin: 10px 0;">بیسکویت مادر مینو ویتامینه؛ طعم خاطره‌ها</h2>
+              <p style="color:var(--sub); font-size:13.5px;">غنی‌شده با ویتامین‌های A و D، میان‌وعده‌ای سالم و دلچسب برای همه</p>
+              <button class="btn-hero" onclick="window.filterCat('snacks')">سفارش بیسکویت مادر</button>
+            </div>
+            <div class="hero-img-box"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600" style="border-radius:12px; height:240px; width:100%; object-fit:cover;"></div>
+          </div>
+        </div>
+
+        <div class="side-cards">
+          <div class="side-card card-pink" onclick="window.filterCat('snacks')">
+            <div><span style="font-size:11px; font-weight:800;">جشنواره</span><h3 style="font-size:16px;">شکلات و نوتلا</h3><p style="font-size:12px;">تخفیف ویژه صبحانه</p></div>
+            <span style="font-size:40px;">🍫</span>
+          </div>
+          <div class="side-card card-blue" onclick="window.filterCat('grocery')">
+            <div><span style="font-size:11px; font-weight:800;">ارسال رایگان</span><h3 style="font-size:16px;">خواربار و روغن</h3><p style="font-size:12px;">خریدهای بالای ۳۰۰ هزار تومن</p></div>
+            <span style="font-size:40px;">🛵</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="stories">
+      <div class="stories-row">
+        <div class="story" onclick="window.filterCat('all')"><div class="story-ring">🛒</div><span style="font-size:12px; font-weight:700;">همه کالاها</span></div>
+        <div class="story" onclick="window.filterCat('snacks')"><div class="story-ring" style="border-color:#ef4444;">🍫</div><span style="font-size:12px; font-weight:700;">نوتلا و تنقلات</span></div>
+        <div class="story" onclick="window.filterCat('dairy')"><div class="story-ring" style="border-color:#3b82f6;">🥛</div><span style="font-size:12px; font-weight:700;">لبنیات و پنیر</span></div>
+        <div class="story" onclick="window.filterCat('grocery')"><div class="story-ring" style="border-color:#f59e0b;">🍚</div><span style="font-size:12px; font-weight:700;">برنج و خواربار</span></div>
+        <div class="story" onclick="window.filterCat('drinks')"><div class="story-ring" style="border-color:#10b981;">☕</div><span style="font-size:12px; font-weight:700;">چای و نوشیدنی</span></div>
+        <div class="story" onclick="window.filterCat('hygiene')"><div class="story-ring" style="border-color:#8b5cf6;">🧴</div><span style="font-size:12px; font-weight:700;">شوینده و بهداشتی</span></div>
+      </div>
+    </section>
+
+    <!-- Incredible Deals Red Box -->
+    <section class="deals-sec" id="incredibleDeals">
+      <div class="deals-box">
+        <div class="deals-side">
+          <span style="font-size:38px;">🔥</span>
+          <h2 style="font-size:20px; font-weight:900;">پیشنهاد شگفت‌انگیز</h2>
+          <div class="timer-wrap">
+            <span style="font-size:11px; display:block; margin-bottom:4px;">فرصت حراج:</span>
+            <div id="dealTimerRow"><span class="timer-box" id="dSec">۴۲</span> : <span class="timer-box" id="dMin">۱۸</span> : <span class="timer-box" id="dHour">۰۵</span></div>
+          </div>
+          <span class="pill-red" style="background:rgba(255,255,255,0.25);">🛵 ارسال اکسپرس زیر ۴۵ دقیقه</span>
+        </div>
+        <div class="deals-scroll" id="dealsGrid"></div>
+      </div>
+    </section>
+
+    <!-- Catalog with Sidebar -->
+    <section class="catalog" id="productsCatalog">
+      <div class="catalog-layout">
+        <aside class="sidebar">
+          <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13.5px; font-weight:800;">
+            <span>فیلتر کالاها</span>
+            <span style="color:var(--red); font-size:11.5px; cursor:pointer;" onclick="window.resetFilters()">حذف فیلترها</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <button class="cat-btn active" data-cat="all" onclick="window.filterCat('all')">همه دسته‌بندی‌ها</button>
+            <button class="cat-btn" data-cat="snacks" onclick="window.filterCat('snacks')">🍫 نوتلا و تنقلات</button>
+            <button class="cat-btn" data-cat="dairy" onclick="window.filterCat('dairy')">🥛 لبنیات و پنیر</button>
+            <button class="cat-btn" data-cat="grocery" onclick="window.filterCat('grocery')">🍚 خواربار و برنج</button>
+            <button class="cat-btn" data-cat="drinks" onclick="window.filterCat('drinks')">☕ چای و نوشیدنی</button>
+            <button class="cat-btn" data-cat="hygiene" onclick="window.filterCat('hygiene')">🧴 شوینده و بهداشتی</button>
+          </div>
+        </aside>
+
+        <div>
+          <div class="top-filter-bar">
+            <div><span class="pill-red" id="cntBadge">۱۲ کالا</span> <span style="font-size:12px; color:var(--sub); margin-right:4px;">از بین بیش از ۱٬۰۰۰٬۰۰۰ محصول</span></div>
+            <div style="display:flex; gap:4px;">
+              <button class="sort-pill active" data-sort="popular" onclick="window.setSort('popular', this)">محبوب‌ترین</button>
+              <button class="sort-pill" data-sort="discount" onclick="window.setSort('discount', this)">بیشترین تخفیف</button>
+              <button class="sort-pill" data-sort="price-asc" onclick="window.setSort('price-asc', this)">ارزان‌ترین</button>
+              <button class="sort-pill" data-sort="price-desc" onclick="window.setSort('price-desc', this)">گران‌ترین</button>
+            </div>
+          </div>
+          <div class="products-grid" id="mainGrid"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay" onclick="window.closeCart()"></div>
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-head"><span>سبد خرید شما (<span id="cCount">۰</span>)</span><button onclick="window.closeCart()" style="font-size:18px;">✕</button></div>
+    <div style="background:var(--bg); padding:10px 16px; font-size:11.5px; font-weight:700;" id="shipTxt">با خرید ۳۰۰٬۰۰۰ تومان ارسال رایگان دریافت کنید!</div>
+    <div class="drawer-list" id="cartList"></div>
+    <div class="drawer-foot">
+      <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>مبلغ نهایی:</span><strong id="cFinal" style="color:var(--red); font-size:17px;">۰ تومان</strong></div>
+      <button class="btn-order" onclick="window.checkout()">تکمیل و نهایی‌سازی سفارش</button>
+    </div>
+  </aside>
+
+  <!-- Modals -->
+  <div class="modal-wrap" id="pModal"><div class="modal"><button class="modal-x" onclick="window.closePModal()">✕</button><div id="mBody"></div></div></div>
+  <div class="modal-wrap" id="aModal">
+    <div class="modal">
+      <button class="modal-x" onclick="window.closeAModal()">✕</button>
+      <h3 style="font-size:15px; margin-bottom:12px;">انتخاب آدرس تحویل اکسپرس</h3>
+      <label style="border:1.5px solid var(--red); padding:10px; border-radius:8px; display:flex; gap:8px; cursor:pointer;">
+        <input type="radio" name="addr" value="تهران، سعادت‌آباد" checked> <div><strong>تهران، سعادت‌آباد</strong><p style="font-size:11px; color:var(--sub);">خیابان سرو غربی (تحویل زیر ۳۵ دقیقه)</p></div>
+      </label>
+      <button class="btn-order" onclick="window.saveAddr()">تایید آدرس</button>
+    </div>
+  </div>
+  <div class="modal-wrap" id="doneModal">
+    <div class="modal" style="text-align:center;">
+      <button class="modal-x" onclick="window.closeDone()">✕</button>
+      <div style="font-size:46px;">✅</div>
+      <h3 style="color:var(--green); font-size:18px; margin:8px 0;">سفارش شما با موفقیت ثبت شد!</h3>
+      <p style="font-size:13px; color:var(--sub); margin-bottom:14px;">سفیر اکسپرس امیر مارکت زیر ۴۵ دقیقه سفارش شما را تحویل می‌دهد.</p>
+      <div style="background:var(--bg); padding:10px; border-radius:8px; font-size:13px; margin-bottom:14px;"><span style="color:var(--red); font-weight:800;" id="tCode">AMIR-94812</span></div>
+      <button class="btn-order" onclick="window.closeDone()">بازگشت به فروشگاه</button>
+    </div>
+  </div>
+
+  <div class="toast-box" id="tBox"></div>
+
+  <!-- Mobile Bar -->
+  <nav class="mobile-bar">
+    <a href="#" class="mob-item"><span>🏠</span><span>خانه</span></a>
+    <a href="#productsCatalog" class="mob-item"><span>📦</span><span>دسته‌ها</span></a>
+    <button class="mob-item" onclick="window.openCart()"><span>🛒</span><span>سبد خرید</span></button>
+    <a href="#incredibleDeals" class="mob-item"><span>🔥</span><span>حراج</span></a>
+  </nav>
+
+  <footer style="background:var(--card); border-top:1px solid var(--border); padding:30px 0; margin-top:40px; text-align:center; font-size:12.5px; color:var(--sub);">
+    <div class="container">
+      <div style="font-size:18px; font-weight:900; margin-bottom:6px;"><span style="color:var(--text);">امیر</span><span style="color:var(--red);">مارکت</span></div>
+      <p style="margin-bottom:10px;">هایپرمارکت آنلاین مواد غذایی با ارسال اکسپرس زیر ۴۵ دقیقه</p>
+      <p>© کلیه حقوق متعلق به هایپرمارکت امیر مارکت می‌باشد.</p>
+    </div>
+  </footer>
+
+  <script>
+    const P = [
+      {id:1, name:"شکلات صبحانه فندقی نوتلا اصل (۳۵۰ گرمی)", category:"snacks", brand:"نوتلا (Nutella)", originalPrice:345000, price:279000, discount:19, reviews:428, weight:"۳۵۰ گرم", image:"https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500", isSpecial:true, desc:"شکلات صبحانه فندقی اصل نوتلا تهیه شده از مرغوب‌ترین فندق‌ها و کاکائوی درجه یک."},
+      {id:2, name:"بیسکویت مادر مینو ویتامینه (بسته‌بندی ۱۴۰ گرمی)", category:"snacks", brand:"مینو (Minoo)", originalPrice:28000, price:22400, discount:20, reviews:852, weight:"۱۴۰ گرم", image:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500", isSpecial:true, desc:"بیسکویت نوستالژیک مادر مینو حاوی ویتامین‌های A و D، میان‌وعده‌ای سالم و پرانرژی."},
+      {id:3, name:"شکلات صبحانه دو رنگ فندقی فرمند (۳۳۰ گرمی)", category:"snacks", brand:"فرمند (Farmand)", originalPrice:115000, price:89000, discount:23, reviews:215, weight:"۳۳۰ گرم", image:"https://images.unsplash.com/photo-1571506165871-ee72a35bc9d4?w=500", isSpecial:true, desc:"شکلات صبحانه کرمی و دورنگ فرمند با طعم فندق و کاکائو."},
+      {id:4, name:"شیر پرچرب بطری کاله (۱ لیتر ۳٪ چربی)", category:"dairy", brand:"کاله (Kalleh)", originalPrice:42000, price:35700, discount:15, reviews:540, weight:"۱ لیتر", image:"https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500", isSpecial:true, desc:"شیر تازه پاستوریزه کاله با کیفیت ممتاز و سرشار از کلسیم."},
+      {id:5, name:"کره حیوانی پاستوریزه شکلی (۱۰۰ گرمی)", category:"dairy", brand:"شکلی (Shekly)", originalPrice:36000, price:30600, discount:15, reviews:198, weight:"۱۰۰ گرم", image:"https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=500", isSpecial:false, desc:"کره صبحانه اصیل شکلی تهیه شده از خامه پاستوریزه تازه با عطر طبیعی."},
+      {id:6, name:"برنج طارم هاشمی درجه یک گیلان (۵ کیلوگرمی)", category:"grocery", brand:"طارم گیلان", originalPrice:820000, price:697000, discount:15, reviews:630, weight:"۵ کیلوگرم", image:"https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500", isSpecial:true, desc:"برنج طارم هاشمی معطر و دو الکه شالیزارهای گیلان با ری‌کش عالی."},
+      {id:7, name:"روغن سرخ‌کردنی شفاف بدون پالم بهار (۱.۵ لیتری)", category:"grocery", brand:"بهار (Bahar)", originalPrice:142000, price:116400, discount:18, reviews:410, weight:"۱.۵ لیتر", image:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500", isSpecial:true, desc:"روغن مخصوص سرخ کردن بهار بدون پالم با مقاومت حرارتی بالا."},
+      {id:8, name:"ماکارونی اسپاگتی زر ماکارون قطر ۱.۲ (۷۰۰ گرمی)", category:"grocery", brand:"زر ماکارون (Zar)", originalPrice:34000, price:27200, discount:20, reviews:780, weight:"۷۰۰ گرم", image:"https://images.unsplash.com/photo-1621996346565-e3d5d6281691?w=500", isSpecial:false, desc:"ماکارونی رشته‌ای زر ماکارون تولید شده از آرد سمولینای اعلا."},
+      {id:9, name:"چای سیلان ارل گری معطر سوفیا (۵۰۰ گرمی)", category:"drinks", brand:"سوفیا (Sophia)", originalPrice:285000, price:228000, discount:20, reviews:340, weight:"۵۰۰ گرم", image:"https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=500", isSpecial:true, desc:"چای سیاه شکسته سیلان با عصاره طبیعی برگاموت و عطر ماندگار."},
+      {id:10, name:"پاستیل خرسی میوه‌ای میکس ببتو (۸۰ گرمی)", category:"snacks", brand:"ببتو (Bebeto)", originalPrice:42000, price:29400, discount:30, reviews:620, weight:"۸۰ گرم", image:"https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=500", isSpecial:true, desc:"پاستیل‌های خرسی خوشمزه با طعم آبمیوه‌های طبیعی و ژلاتین حلال."},
+      {id:11, name:"مایع دستشویی کرمی اکتیو با عصاره بادام (۴۵۰ گرم)", category:"hygiene", brand:"اکتیو (Active)", originalPrice:62000, price:46500, discount:25, reviews:580, weight:"۴۵۰ گرم", image:"https://images.unsplash.com/photo-1608248597359-59841804ff2b?w=500", isSpecial:false, desc:"فرمولاسیون لطیف حاوی کرم مرطوب‌کننده و پروتئین شیر و بادام."},
+      {id:12, name:"رب گوجه فرنگی قوطی روژین (۸۰۰ گرمی)", category:"grocery", brand:"روژین (Rojin)", originalPrice:72000, price:54000, discount:25, reviews:520, weight:"۸۰۰ گرم", image:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500", isSpecial:true, desc:"رب گوجه خالص و غلیظ روژین بدون مواد افزودنی و نگه‌دارنده."}
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('am_cart')) || {};
+    let curCat = 'all', curSort = 'popular', searchQ = '';
+
+    const fa = n => (n === null || n === undefined) ? '' : n.toString().replace(/[0-9]/g, w => ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'][+w]);
+    const pr = n => !n ? '۰' : fa(n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "٬"));
+
+    function card(p, isDeal = false) {
+      const q = cart[p.id] || 0;
+      return `
+        <div class="p-card ${isDeal ? 'deal-card' : ''}">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span class="badge-disc">${fa(p.discount)}٪-</span>
+            <span style="font-size:10.5px; color:var(--green); font-weight:700;">ارسال ۴۵دقیقه ⚡</span>
+          </div>
+          <div class="img-box" onclick="window.openP(${p.id})">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" />
+          </div>
+          <span style="font-size:11px; font-weight:700; color:var(--sub);">${p.brand}</span>
+          <h4 class="p-title" onclick="window.openP(${p.id})">${p.name}</h4>
+          <div class="p-price-row">
+            <span class="old-p">${pr(p.originalPrice)} ت</span>
+            <strong class="new-p">${pr(p.price)} تومان</strong>
+          </div>
+          <div>
+            ${q === 0 ? `
+              <button class="btn-add-p" onclick="window.add(${p.id})">+ افزودن به سبد</button>
+            ` : `
+              <div class="qty-box">
+                <button onclick="window.add(${p.id})" style="color:#fff; font-size:16px;">+</button>
+                <span>${fa(q)}</span>
+                <button onclick="window.remove(${p.id})" style="color:#fff; font-size:16px;">${q===1?'🗑️':'−'}</button>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function render() {
+      const g = document.getElementById('mainGrid');
+      let list = P.filter(p => (curCat === 'all' || p.category === curCat) && (!searchQ || p.name.includes(searchQ) || p.brand.includes(searchQ)));
+      if (curSort === 'discount') list.sort((a,b) => b.discount - a.discount);
+      else if (curSort === 'price-asc') list.sort((a,b) => a.price - b.price);
+      else if (curSort === 'price-desc') list.sort((a,b) => b.price - a.price);
+      else list.sort((a,b) => b.reviews - a.reviews);
+      document.getElementById('cntBadge').textContent = `${fa(list.length)} کالا`;
+      g.innerHTML = list.map(p => card(p)).join('');
+      document.getElementById('dealsGrid').innerHTML = P.filter(p => p.isSpecial).map(p => card(p, true)).join('');
+    }
+
+    window.add = id => { cart[id] = (cart[id] || 0) + 1; save(); toast('کالا به سبد اضافه شد'); };
+    window.remove = id => { if (cart[id]) { cart[id]--; if (!cart[id]) delete cart[id]; save(); } };
+    function save() { localStorage.setItem('am_cart', JSON.stringify(cart)); updateCart(); }
+
+    function updateCart() {
+      let count = 0, total = 0;
+      for (const [id, q] of Object.entries(cart)) {
+        const p = P.find(x => x.id === +id);
+        if (p) { count += q; total += p.price * q; }
+      }
+      document.getElementById('hCartCount').textContent = fa(count);
+      document.getElementById('hCartTotal').textContent = `${pr(total)} تومان`;
+      document.getElementById('cCount').textContent = fa(count);
+      document.getElementById('cFinal').textContent = `${pr(total)} تومان`;
+      const sTxt = document.getElementById('shipTxt');
+      if (total >= 300000) sTxt.textContent = '🎉 ارسال این سفارش رایگان است!';
+      else sTxt.textContent = `تنها ${pr(300000 - total)} تومان دیگر تا ارسال رایگان!`;
+
+      const cl = document.getElementById('cartList');
+      if (!count) cl.innerHTML = '<div style="text-align:center; padding:30px; color:var(--sub);">سبد خرید خالی است</div>';
+      else cl.innerHTML = Object.entries(cart).map(([id, q]) => {
+        const p = P.find(x => x.id === +id);
+        return p ? `<div class="drawer-item"><img src="${p.image}" class="drawer-thumb" /><div><strong style="font-size:12px;">${p.name}</strong><div style="color:var(--red); font-weight:800; font-size:12px;">${pr(p.price * q)} ت</div></div><div style="margin-right:auto; display:flex; gap:8px;"><button onclick="window.add(${p.id})">+</button><span>${fa(q)}</span><button onclick="window.remove(${p.id})">${q===1?'🗑️':'−'}</button></div></div>` : '';
+      }).join('');
+      render();
+    }
+
+    window.filterCat = c => { curCat = c; document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === c)); render(); };
+    window.resetFilters = () => { curCat = 'all'; searchQ = ''; document.getElementById('searchInput').value = ''; window.filterCat('all'); };
+    window.setSort = (s, btn) => { curSort = s; document.querySelectorAll('.sort-pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); render(); };
+
+    window.openCart = () => { document.getElementById('cartDrawer').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); };
+    window.closeCart = () => { document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); };
+
+    window.openP = id => {
+      const p = P.find(x => x.id === id);
+      if (p) {
+        document.getElementById('mBody').innerHTML = `<div style="display:flex; gap:16px; align-items:center;"><img src="${p.image}" style="width:160px; border-radius:8px;" /><div><h3 style="font-size:16px;">${p.name}</h3><p style="font-size:12.5px; color:var(--sub); margin:6px 0;">${p.desc}</p><div style="font-size:16px; font-weight:900; color:var(--red); margin-bottom:10px;">${pr(p.price)} تومان</div><button class="btn-order" onclick="window.add(${p.id}); window.closePModal();">افزودن به سبد</button></div></div>`;
+        document.getElementById('pModal').classList.add('open');
+      }
+    };
+    window.closePModal = () => document.getElementById('pModal').classList.remove('open');
+
+    window.openAddr = () => document.getElementById('aModal').classList.add('open');
+    window.closeAModal = () => document.getElementById('aModal').classList.remove('open');
+    window.saveAddr = () => { document.getElementById('curAddr').textContent = document.querySelector('input[name="addr"]:checked').value; window.closeAModal(); toast('آدرس بروز شد'); };
+
+    window.checkout = () => {
+      window.closeCart();
+      document.getElementById('tCode').textContent = `AMIR-${Math.floor(10000 + Math.random()*90000)}`;
+      document.getElementById('doneModal').classList.add('open');
+      cart = {}; save();
+    };
+    window.closeDone = () => document.getElementById('doneModal').classList.remove('open');
+
+    function toast(msg) {
+      const b = document.getElementById('tBox');
+      const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; b.appendChild(t);
+      setTimeout(() => t.remove(), 2500);
+    }
+
+    const inp = document.getElementById('searchInput'), drop = document.getElementById('searchDrop');
+    inp.addEventListener('input', e => {
+      searchQ = e.target.value.trim();
+      drop.classList.toggle('open', !!searchQ);
+      if (searchQ) {
+        const m = P.filter(p => p.name.includes(searchQ)).slice(0, 3);
+        document.getElementById('searchResList').innerHTML = m.map(p => `<div style="padding:4px; font-size:12px; cursor:pointer;" onclick="window.openP(${p.id})">${p.name} - ${pr(p.price)} ت</div>`).join('') || '<div style="font-size:11px; color:var(--sub);">موردی یافت نشد</div>';
+      }
+      render();
+    });
+    window.quickSearch = q => { inp.value = q; searchQ = q; drop.classList.remove('open'); render(); };
+
+    const tBtn = document.getElementById('themeBtn');
+    function applyT(dark) {
+      document.body.classList.toggle('dark-mode', dark);
+      document.getElementById('themeIco').textContent = dark ? '☀️' : '🌙';
+      document.getElementById('themeTxt').textContent = dark ? 'حالت روز' : 'حالت شب';
+      localStorage.setItem('am_dark', dark ? '1' : '0');
+    }
+    tBtn.onclick = () => applyT(!document.body.classList.contains('dark-mode'));
+
+    let sl = 0; const slides = document.querySelectorAll('.slide');
+    setInterval(() => { slides[sl].classList.remove('active'); sl = (sl + 1) % slides.length; slides[sl].classList.add('active'); }, 4500);
+
+    let s = 42, m = 18, h = 5;
+    setInterval(() => {
+      s--; if (s < 0) { s = 59; m--; if (m < 0) { m = 59; h--; } }
+      const ss = fa(s.toString().padStart(2,'0')), mm = fa(m.toString().padStart(2,'0')), hh = fa(h.toString().padStart(2,'0'));
+      document.getElementById('dSec').textContent = ss; document.getElementById('dMin').textContent = mm; document.getElementById('dHour').textContent = hh;
+      document.getElementById('headerTimer').textContent = `${hh}:${mm}:${ss}`;
+    }, 1000);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyT(localStorage.getItem('am_dark') === '1');
+      updateCart();
+    });
+  </script>
+</body>
+</html>
