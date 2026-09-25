@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>امیر مارکت | هایپرمارکت آنلاین مواد غذایی و سوپرمارکت اینترنتی</title>
+  <meta name="description" content="امیر مارکت، بزرگترین هایپرمارکت آنلاین با بیش از میلیون‌ها محصول مواد غذایی، نوتلا، بیسکویت مادر، لبنیات، پروتئینی و شوینده با تخفیف‌های شگفت‌انگیز و ارسال فوری کمتر از ۴۵ دقیقه شبیه اکالا.">
+  <meta name="theme-color" content="#ef394e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-tag">
+        <span class="pulse-dot"></span>
+        <span>سوپرمارکت فوری ۴۵ دقیقه‌ای</span>
+      </div>
+      <p class="announcement-text">
+        🛵 تحویل اکسپرس مواد غذایی در کمتر از ۴۵ دقیقه در تمامی مناطق | حراج ویژه اول هفته امیر مارکت تا ۵۰٪ تخفیف
+      </p>
+      <div class="announcement-countdown">
+        <span>مهلت استفاده:</span>
+        <span id="headerTimer" class="timer-badge">۰۴:۲۸:۱۵</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container header-container">
+      
+      <div class="header-right">
+        <a href="#" class="logo-wrapper">
+          <div class="logo-icon-box">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="logo-sparkle">✦</span>
+          </div>
+          <div class="logo-text-group">
+            <div class="logo-title">
+              <span class="logo-main">امیر</span><span class="logo-highlight">مارکت</span>
+            </div>
+            <span class="logo-subtitle">هایپرمارکت آنلاین مواد غذایی</span>
+          </div>
+        </a>
+
+        <button class="location-btn" id="openAddressModalBtn" title="تغییر آدرس تحویل">
+          <span class="location-pin-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </span>
+          <div class="location-info">
+            <span class="location-label">ارسال سریع به:</span>
+            <span class="location-name" id="currentAddressText">تهران، سعادت‌آباد، خیابان سرو غربی</span>
+          </div>
+          <svg class="chevron-down" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="header-center">
+        <div class="search-box">
+          <div class="search-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="جستجو در بین میلیون‌ها کالا (نوتلا، بیسکویت مادر، لبنیات، برنج...)" 
+            autocomplete="off"
+          />
+          <button class="clear-search-btn" id="clearSearchBtn" title="پاک کردن جستجو" style="display:none;">✕</button>
+          
+          <div class="search-dropdown" id="searchDropdown">
+            <div class="search-quick-tags">
+              <span class="quick-title">بیشترین جستجوها:</span>
+              <button class="quick-tag" data-query="نوتلا">نوتلا اصل</button>
+              <button class="quick-tag" data-query="بیسکویت مادر">بیسکویت مادر</button>
+              <button class="quick-tag" data-query="شیر">شیر کاله</button>
+              <button class="quick-tag" data-query="برنج">برنج طارم</button>
+              <button class="quick-tag" data-query="روغن">روغن سرخ کردنی</button>
+            </div>
+            <div class="search-results-list" id="searchResultsList"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-left">
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="تغییر حالت شب/روز">
+          <span class="theme-icon sun-icon">☀️</span>
+          <span class="theme-icon moon-icon">🌙</span>
+          <span class="theme-label" id="themeLabel">حالت شب</span>
+        </button>
+
+        <button class="user-btn" id="userBtn" title="ورود / ثبت‌نام کاربر">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>ورود / عضویت</span>
+        </button>
+
+        <button class="cart-btn" id="openCartBtn" title="مشاهده سبد خرید">
+          <div class="cart-icon-wrap">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cart-counter" id="headerCartCount">۰</span>
+          </div>
+          <div class="cart-btn-text">
+            <span class="cart-btn-title">سبد خرید</span>
+            <span class="cart-btn-total" id="headerCartTotal">۰ تومان</span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Subheader Menu -->
+    <nav class="subheader-nav">
+      <div class="container subheader-inner">
+        <ul class="nav-links">
+          <li class="mega-menu-trigger">
+            <a href="#productsCatalog" class="nav-link highlight-category">
+              <span>☰ دسته‌بندی کالاها</span>
+            </a>
+          </li>
+          <li><a href="#incredibleDeals" class="nav-link text-fire"><span>🔥 پیشنهاد شگفت‌انگیز</span></a></li>
+          <li><a href="#productsCatalog" class="nav-link" data-category="snacks"><span>🍫 تنقلات و نوتلا</span></a></li>
+          <li><a href="#productsCatalog" class="nav-link" data-category="dairy"><span>🥛 لبنیات تازه</span></a></li>
+          <li><a href="#productsCatalog" class="nav-link" data-category="grocery"><span>🍚 خواربار و برنج</span></a></li>
+          <li><a href="#productsCatalog" class="nav-link" data-category="drinks"><span>☕ چای و نوشیدنی</span></a></li>
+          <li><a href="#productsCatalog" class="nav-link" data-category="hygiene"><span>🧴 شوینده و بهداشتی</span></a></li>
+          <li><a href="#productsCatalog" class="nav-link" data-category="protein"><span>🥩 پروتئینی و مرغ</span></a></li>
+        </ul>
+        <div class="subheader-badge">
+          <span>🛡️ ضمانت اصالت ۱۰۰٪ کالاها</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Hero Slider Section -->
+    <section class="hero-section">
+      <div class="container hero-container">
+        
+        <div class="slider-wrapper">
+          <div class="slider-track" id="heroSlider">
+            
+            <div class="hero-slide active slide-1">
+              <div class="slide-content">
+                <div class="slide-badge">هایپرمارکت آنلاین امیر مارکت</div>
+                <h1 class="slide-title">میلیون‌ها کالای سوپرمارکتی با تخفیف تا ۵۰٪</h1>
+                <p class="slide-desc">از معروف‌ترین برندهای ایران و جهان؛ نوتلا اصل، بیسکویت مادر مینو، کاله، روژین، بهار با تضمین تازگی تاریخ روز</p>
+                <div class="slide-actions">
+                  <a href="#incredibleDeals" class="slide-btn btn-primary">خرید با تخفیف ویژه</a>
+                  <a href="#productsCatalog" class="slide-btn btn-outline">مشاهده همه کالاها</a>
+                </div>
+              </div>
+              <div class="slide-media">
+                <div class="floating-bubble bubble-1">
+                  <span>🍫 نوتلا اصل</span>
+                  <strong>۱۹٪ تخفیف</strong>
+                </div>
+                <div class="floating-bubble bubble-2">
+                  <span>🍪 بیسکویت مادر</span>
+                  <strong>نوستالژی ماندگار</strong>
+                </div>
+                <div class="slide-hero-img-box">
+                  <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80" alt="هایپرمارکت امیر مارکت" class="slide-hero-img">
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-slide slide-2">
+              <div class="slide-content">
+                <div class="slide-badge badge-warning">صبحانه طلایی و پرانرژی</div>
+                <h2 class="slide-title">شکلات صبحانه نوتلا و فرمند با ضمانت اصالت</h2>
+                <p class="slide-desc">لذت فندق طبیعی و شکلات خالص نوتلا در کنار شیر و کره تازه، ارسال سریع درب منزل شما</p>
+                <div class="slide-actions">
+                  <button class="slide-btn btn-primary" onclick="window.filterByCategory('snacks')">خرید نوتلا و صبحانه</button>
+                </div>
+              </div>
+              <div class="slide-media">
+                <div class="slide-hero-img-box">
+                  <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&auto=format&fit=crop&q=80" alt="نوتلا اصل" class="slide-hero-img">
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-slide slide-3">
+              <div class="slide-content">
+                <div class="slide-badge badge-green">نوستالژی ماندگار</div>
+                <h2 class="slide-title">بیسکویت مادر مینو؛ طعم مهربانی برای چند نسل</h2>
+                <p class="slide-desc">غنی‌شده با ویتامین‌های A و D و پروتئین، همراه همیشگی میان‌وعده‌های مقوی کودکان و عصرانه دلپذیر</p>
+                <div class="slide-actions">
+                  <button class="slide-btn btn-primary" onclick="window.filterByCategory('snacks')">سفارش بیسکویت مادر</button>
+                </div>
+              </div>
+              <div class="slide-media">
+                <div class="slide-hero-img-box">
+                  <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&auto=format&fit=crop&q=80" alt="بیسکویت مادر" class="slide-hero-img">
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-slide slide-4">
+              <div class="slide-content">
+                <div class="slide-badge badge-purple">اکسپرس سوپرمارکت ۴۵ دقیقه</div>
+                <h2 class="slide-title">تا چای دم بکشه، خریدت تحویل داده شده!</h2>
+                <p class="slide-desc">تیم سفیران امیر مارکت با بسته‌بندی ویژه و عایق سرما، تازه و خنک سفارش شما را سریع تحویل می‌دهند</p>
+                <div class="slide-actions">
+                  <a href="#productsCatalog" class="slide-btn btn-primary">شروع خرید فوری</a>
+                </div>
+              </div>
+              <div class="slide-media">
+                <div class="slide-hero-img-box">
+                  <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&auto=format&fit=crop&q=80" alt="ارسال سریع" class="slide-hero-img">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="slider-navigation">
+            <button class="slider-arrow next-btn" id="nextSlideBtn">‹</button>
+            <div class="slider-dots" id="sliderDots">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+              <span class="dot" data-index="2"></span>
+              <span class="dot" data-index="3"></span>
+            </div>
+            <button class="slider-arrow prev-btn" id="prevSlideBtn">›</button>
+          </div>
+        </div>
+
+        <div class="hero-side-banners">
+          <div class="side-banner-card banner-pink">
+            <div class="side-banner-content">
+              <span class="mini-tag">فروش ویژه</span>
+              <h4>ارسال رایگان</h4>
+              <p>برای خریدهای بالای ۳۰۰ هزار تومان</p>
+              <span class="side-link">سفارش دهید ←</span>
+            </div>
+            <div class="side-banner-icon">🛵</div>
+          </div>
+          <div class="side-banner-card banner-blue">
+            <div class="side-banner-content">
+              <span class="mini-tag">ضمانت ۱۰۰٪</span>
+              <h4>تازگی تضمین‌شده</h4>
+              <p>تاریخ مصرف کاملاً جدید و معتبر</p>
+              <span class="side-link">بیشتر بدانید ←</span>
+            </div>
+            <div class="side-banner-icon">📅</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Category Stories -->
+    <section class="category-stories-section">
+      <div class="container">
+        <div class="section-title-wrap">
+          <h3 class="section-title">دسته‌بندی‌های محبوب امیر مارکت</h3>
+          <span class="section-subtitle">میلیون‌ها کالا در دسته‌بندی‌های متنوع</span>
+        </div>
+        
+        <div class="category-stories-slider">
+          <div class="story-circle-item" onclick="window.filterByCategory('all')">
+            <div class="story-circle ring-all"><span class="story-emoji">🛒</span></div>
+            <span class="story-name">همه کالاها</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('snacks')">
+            <div class="story-circle ring-red"><span class="story-emoji">🍫</span></div>
+            <span class="story-name">نوتلا و تنقلات</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('dairy')">
+            <div class="story-circle ring-blue"><span class="story-emoji">🥛</span></div>
+            <span class="story-name">لبنیات و پنیر</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('grocery')">
+            <div class="story-circle ring-amber"><span class="story-emoji">🍚</span></div>
+            <span class="story-name">برنج و خواربار</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('drinks')">
+            <div class="story-circle ring-green"><span class="story-emoji">☕</span></div>
+            <span class="story-name">چای و نوشیدنی</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('hygiene')">
+            <div class="story-circle ring-purple"><span class="story-emoji">🧴</span></div>
+            <span class="story-name">شوینده و بهداشتی</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('protein')">
+            <div class="story-circle ring-orange"><span class="story-emoji">🥩</span></div>
+            <span class="story-name">مرغ و تخم‌مرغ</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('canned')">
+            <div class="story-circle ring-cyan"><span class="story-emoji">🥫</span></div>
+            <span class="story-name">کنسرو و آماده</span>
+          </div>
+          <div class="story-circle-item" onclick="window.filterByCategory('nuts')">
+            <div class="story-circle ring-gold"><span class="story-emoji">🥜</span></div>
+            <span class="story-name">آجیل و خشکبار</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Incredible Deals Section -->
+    <section class="incredible-deals-section" id="incredibleDeals">
+      <div class="container">
+        <div class="incredible-deals-wrapper">
+          <div class="deal-info-card">
+            <div class="deal-sparkle-icon">🔥</div>
+            <h2 class="deal-title">پیشنهاد شگفت‌انگیز</h2>
+            <div class="deal-subtext">تخفیف‌های استثنایی هایپرمارکت</div>
+            
+            <div class="deal-timer-box">
+              <div class="timer-label">زمان باقی‌مانده حراج:</div>
+              <div class="countdown-digits">
+                <div class="digit-box"><span id="dealSec">۴۲</span><small>ثانیه</small></div>
+                <span class="digit-sep">:</span>
+                <div class="digit-box"><span id="dealMin">۱۸</span><small>دقیقه</small></div>
+                <span class="digit-sep">:</span>
+                <div class="digit-box"><span id="dealHour">۰۵</span><small>ساعت</small></div>
+              </div>
+            </div>
+
+            <div class="deal-badge-footer">
+              <span>🛵 ارسال فوری زیر ۴۵ دقیقه</span>
+            </div>
+          </div>
+
+          <div class="deals-products-track" id="specialDealsGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="products-catalog-section" id="productsCatalog">
+      <div class="container">
+        
+        <div class="catalog-header">
+          <div class="catalog-title-box">
+            <h2 class="catalog-main-title">ویترین کالاهای امیر مارکت</h2>
+            <div class="catalog-stats">
+              <span class="stat-badge" id="productCountBadge">نمایش ۲۴ کالا</span>
+              <span class="stat-tag">از مجموع ۱٬۲۵۰٬۰۰۰ تنوع کالا</span>
+            </div>
+          </div>
+
+          <div class="catalog-sort-bar">
+            <span class="sort-title">مرتب‌سازی:</span>
+            <div class="sort-options" id="sortOptions">
+              <button class="sort-btn active" data-sort="popular">محبوب‌ترین</button>
+              <button class="sort-btn" data-sort="discount">بیشترین تخفیف</button>
+              <button class="sort-btn" data-sort="price-asc">ارزان‌ترین</button>
+              <button class="sort-btn" data-sort="price-desc">گران‌ترین</button>
+              <button class="sort-btn" data-sort="rating">بالاترین امتیاز</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-chips-bar" id="categoryChips">
+          <button class="category-chip active" data-cat="all">همه دسته‌ها</button>
+          <button class="category-chip" data-cat="snacks">🍫 نوتلا و تنقلات</button>
+          <button class="category-chip" data-cat="dairy">🥛 لبنیات و صبحانه</button>
+          <button class="category-chip" data-cat="grocery">🍚 خواربار و برنج</button>
+          <button class="category-chip" data-cat="drinks">☕ چای و نوشیدنی</button>
+          <button class="category-chip" data-cat="hygiene">🧴 شوینده و بهداشتی</button>
+          <button class="category-chip" data-cat="protein">🥩 پروتئینی و گوشت</button>
+          <button class="category-chip" data-cat="canned">🥫 کنسرو و آماده</button>
+          <button class="category-chip" data-cat="nuts">🥜 آجیل و خشکبار</button>
+        </div>
+
+        <div class="products-grid" id="mainProductsGrid"></div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-icon">🔍</div>
+          <h3>کالایی با این مشخصات یافت نشد!</h3>
+          <p>لطفاً عبارت دیگری را جستجو کرده یا فیلتر دسته‌بندی را تغییر دهید.</p>
+          <button class="btn-primary" onclick="window.resetFilters()">مشاهده همه کالاها</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Trust Features -->
+    <section class="trust-features-section">
+      <div class="container">
+        <div class="trust-features-grid">
+          <div class="trust-card">
+            <div class="trust-icon-box">🛵</div>
+            <div class="trust-info">
+              <h4>تحویل فوری زیر ۴۵ دقیقه</h4>
+              <p>سریع‌ترین پیک سوپرمارکتی شهری</p>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon-box">🛡️</div>
+            <div class="trust-info">
+              <h4>ضمانت اصالت ۱۰۰٪</h4>
+              <p>تضمین بالاترین کیفیت و برندهای معتبر</p>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon-box">📅</div>
+            <div class="trust-info">
+              <h4>تضمین تازگی و تاریخ روز</h4>
+              <p>تمامی اقلام با تازه‌ترین تاریخ تولید</p>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon-box">💳</div>
+            <div class="trust-info">
+              <h4>پرداخت آنلاین یا در محل</h4>
+              <p>با کلیه کارت‌های عضو شتاب</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div class="cart-header-title">
+        <span>سبد خرید شما</span>
+        <span class="cart-items-pill" id="cartTotalItemsCount">۰ کالا</span>
+      </div>
+      <div class="cart-header-actions">
+        <button class="clear-cart-link" id="clearCartBtn">حذف همه</button>
+        <button class="close-cart-btn" id="closeCartBtn">✕</button>
+      </div>
+    </div>
+
+    <div class="free-shipping-box">
+      <div class="free-shipping-text" id="freeShippingText">
+        <span>فقط <strong>۱۵۰٬۰۰۰ تومان</strong> تا ارسال رایگان!</span>
+      </div>
+      <div class="shipping-progress-bg">
+        <div class="shipping-progress-bar" id="shippingProgressBar" style="width: 30%;"></div>
+      </div>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsList"></div>
+
+    <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
+      <div class="cart-empty-icon">🛍️</div>
+      <h4>سبد خرید شما در حال حاضر خالی است</h4>
+      <p>محصولات مورد نظرتان مانند نوتلا، بیسکویت مادر و لبنیات تازه را اضافه کنید.</p>
+      <button class="btn-primary" onclick="window.closeCart()">رفتن به فروشگاه</button>
+    </div>
+
+    <div class="cart-footer" id="cartFooter">
+      <div class="coupon-section">
+        <div class="coupon-input-wrap">
+          <input type="text" id="couponInput" placeholder="کد تخفیف (مثال: AMIR50)" />
+          <button class="apply-coupon-btn" id="applyCouponBtn">اعمال کد</button>
+        </div>
+        <div class="coupon-message" id="couponMessage"></div>
+      </div>
+
+      <div class="cart-summary-table">
+        <div class="summary-row">
+          <span>جمع کل کالاها:</span>
+          <span id="cartSubtotal">۰ تومان</span>
+        </div>
+        <div class="summary-row text-success">
+          <span>سود شما از تخفیف‌ها:</span>
+          <span id="cartDiscountTotal">۰ تومان</span>
+        </div>
+        <div class="summary-row text-purple" id="couponRow" style="display: none;">
+          <span>تخفیف کد معرف/کوپن:</span>
+          <span id="couponDiscountValue">۰ تومان</span>
+        </div>
+        <div class="summary-row">
+          <span>هزینه ارسال سوپرمارکت:</span>
+          <span id="cartShippingFee">رایگان</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row total-row">
+          <span>مبلغ قابل پرداخت:</span>
+          <span class="total-amount" id="cartFinalTotal">۰ تومان</span>
+        </div>
+      </div>
+
+      <button class="btn-checkout" id="checkoutBtn">
+        <span>تکمیل و ثبت سفارش</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Quick View Modal -->
+  <div class="modal-backdrop" id="productModalBackdrop">
+    <div class="product-modal-card" id="productModalCard">
+      <button class="modal-close-btn" id="closeProductModalBtn">✕</button>
+      <div class="modal-body" id="productModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Address Modal -->
+  <div class="modal-backdrop" id="addressModalBackdrop">
+    <div class="address-modal-card">
+      <div class="modal-header">
+        <h3>انتخاب و تغییر آدرس تحویل سوپرمارکت</h3>
+        <button class="modal-close-btn" id="closeAddressModalBtn">✕</button>
+      </div>
+      <div class="address-list">
+        <label class="address-item active">
+          <input type="radio" name="delivery_address" value="تهران، سعادت‌آباد، خیابان سرو غربی، پلاک ۲۴" checked>
+          <div class="address-info">
+            <strong>تهران، سعادت‌آباد</strong>
+            <p>خیابان سرو غربی، پلاک ۲۴، واحد ۶ (تحویل کمتر از ۳۵ دقیقه)</p>
+          </div>
+          <span class="address-badge">پیش‌فرض</span>
+        </label>
+        <label class="address-item">
+          <input type="radio" name="delivery_address" value="تهران، پونک، بلوار میرزابابایی، پلاک ۱۸">
+          <div class="address-info">
+            <strong>تهران، پونک</strong>
+            <p>بلوار میرزابابایی، کوچه گلستان، پلاک ۱۸، واحد ۲</p>
+          </div>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary full-width" id="confirmAddressBtn">تایید و ذخیره آدرس</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal-backdrop" id="checkoutModalBackdrop">
+    <div class="checkout-modal-card">
+      <div class="modal-header">
+        <h3 id="checkoutModalTitle">تکمیل و نهایی‌سازی سفارش</h3>
+        <button class="modal-close-btn" id="closeCheckoutModalBtn">✕</button>
+      </div>
+
+      <div class="checkout-step-content" id="checkoutFormStep">
+        <div class="checkout-section">
+          <h4>۱. بازه زمانی تحویل سفارش:</h4>
+          <div class="time-slots-grid">
+            <label class="time-slot active">
+              <input type="radio" name="timeSlot" value="امروز - بازه فوری (۳۰ تا ۴۵ دقیقه آینده)" checked>
+              <strong>ارسال فوری ⚡</strong>
+              <span>۳۰ الی ۴۵ دقیقه آینده</span>
+            </label>
+            <label class="time-slot">
+              <input type="radio" name="timeSlot" value="امروز - ساعت ۱۸:۰۰ الی ۲۰:۰۰">
+              <strong>امروز عصر</strong>
+              <span>ساعت ۱۸:۰۰ الی ۲۰:۰۰</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="checkout-section">
+          <h4>۲. روش پرداخت:</h4>
+          <div class="payment-methods-grid">
+            <label class="payment-card active">
+              <input type="radio" name="paymentMethod" value="پرداخت اینترنتی با درگاه امن شتاب" checked>
+              <span class="pay-icon">💳</span>
+              <div class="pay-text">
+                <strong>درگاه پرداخت امن بانکی</strong>
+                <span>کلیه کارت‌های عضو شبکه شتاب</span>
+              </div>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="پرداخت در محل (کارتخوان سیار)">
+              <span class="pay-icon">🛵</span>
+              <div class="pay-text">
+                <strong>پرداخت در محل</strong>
+                <span>کارتخوان سیار توسط سفیر اکسپرس</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="checkout-order-preview">
+          <div class="preview-row">
+            <span>مبلغ نهایی قابل پرداخت:</span>
+            <strong class="text-danger" id="checkoutModalAmount">۰ تومان</strong>
+          </div>
+        </div>
+
+        <button class="btn-primary full-width big-btn" id="submitOrderBtn">
+          تایید نهایی و پرداخت سفارش
+        </button>
+      </div>
+
+      <div class="checkout-success-content" id="checkoutSuccessStep" style="display: none;">
+        <div class="success-icon-animated">✅</div>
+        <h3>سفارش شما با موفقیت ثبت شد!</h3>
+        <p>از خرید شما از هایپرمارکت آنلاین امیر مارکت سپاسگزاریم.</p>
+        <div class="order-receipt-card">
+          <div class="receipt-row">
+            <span>کد پیگیری سفارش:</span>
+            <strong id="receiptTrackingCode">AMIR-94812</strong>
+          </div>
+          <div class="receipt-row">
+            <span>زمان تحویل:</span>
+            <span id="receiptDeliveryTime">۳۰ الی ۴۵ دقیقه آینده</span>
+          </div>
+          <div class="receipt-row">
+            <span>مبلغ پرداختی:</span>
+            <strong id="receiptTotalAmount">۰ تومان</strong>
+          </div>
+          <div class="receipt-row">
+            <span>آدرس تحویل:</span>
+            <span id="receiptAddress">تهران، سعادت‌آباد</span>
+          </div>
+        </div>
+        <button class="btn-primary full-width" onclick="window.closeSuccessModal()">
+          بازگشت به صفحه اصلی فروشگاه
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-bar">
+    <a href="#" class="mobile-nav-item active"><span>🏠 خانه</span></a>
+    <a href="#productsCatalog" class="mobile-nav-item"><span>📦 دسته‌ها</span></a>
+    <button class="mobile-nav-item mobile-cart-trigger" id="mobileCartBtn">
+      <div class="mobile-cart-badge-wrap">
+        <span>🛒</span>
+        <span class="mobile-cart-counter" id="mobileCartCount">۰</span>
+      </div>
+      <span>سبد خرید</span>
+    </button>
+    <a href="#incredibleDeals" class="mobile-nav-item"><span>🔥 حراج</span></a>
+    <button class="mobile-nav-item" id="mobileProfileBtn"><span>👤 حساب من</span></button>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-container">
+      <div class="footer-brand-section">
+        <div class="footer-logo">
+          <span class="logo-main">امیر</span><span class="logo-highlight">مارکت</span>
+        </div>
+        <p class="footer-desc">
+          امیر مارکت به عنوان پیشرفته‌ترین هایپرمارکت آنلاین مواد غذایی کشور، با فراهم آوردن بیش از یک میلیون کالای اصیل از برترین برندها نظیر نوتلا، مینو، کاله، بهار و روژین، امکان خرید سریع، آسان و ارزان را با تحویل کمتر از ۴۵ دقیقه فراهم کرده است.
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <p>تمامی حقوق مادی و معنوی این وبسایت متعلق به هایپرمارکت اینترنتی <strong>امیر مارکت</strong> می‌باشد. © ۱۴۰۳ - ۲۰۲۵</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
