@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 850" width="1000" height="850">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#0a1220" />
+      <stop offset="100%" stop-color="#000000" />
+    </radialGradient>
+
+    <!-- Metallic Blue Gradients for Letter 'A' -->
+    <linearGradient id="blueMain" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#1e70d4" />
+      <stop offset="35%" stop-color="#0d47a1" />
+      <stop offset="70%" stop-color="#072b66" />
+      <stop offset="100%" stop-color="#031636" />
+    </linearGradient>
+
+    <linearGradient id="blueLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64b5f6" />
+      <stop offset="40%" stop-color="#1976d2" />
+      <stop offset="100%" stop-color="#0a2f68" />
+    </linearGradient>
+
+    <linearGradient id="blueDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#082959" />
+      <stop offset="100%" stop-color="#020e21" />
+    </linearGradient>
+
+    <linearGradient id="blueEdgeGleam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#90caf9" />
+      <stop offset="50%" stop-color="#42a5f5" />
+      <stop offset="100%" stop-color="#1565c0" />
+    </linearGradient>
+
+    <!-- Metallic Gold Gradients for Letter 'M' and Wings -->
+    <linearGradient id="goldLight" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#fff199" />
+      <stop offset="25%" stop-color="#ffd54f" />
+      <stop offset="55%" stop-color="#ffb300" />
+      <stop offset="85%" stop-color="#d48800" />
+      <stop offset="100%" stop-color="#8a5300" />
+    </linearGradient>
+
+    <linearGradient id="goldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e09900" />
+      <stop offset="40%" stop-color="#ab6b00" />
+      <stop offset="80%" stop-color="#6e4200" />
+      <stop offset="100%" stop-color="#3d2200" />
+    </linearGradient>
+
+    <linearGradient id="goldGleam" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ffe57f" />
+      <stop offset="50%" stop-color="#ffc107" />
+      <stop offset="100%" stop-color="#ff8f00" />
+    </linearGradient>
+
+    <linearGradient id="goldWing" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffea79" />
+      <stop offset="40%" stop-color="#ffa000" />
+      <stop offset="100%" stop-color="#b26a00" />
+    </linearGradient>
+
+    <!-- Radial Wheel Gold Cap Gradient -->
+    <radialGradient id="goldSphere" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="25%" stop-color="#ffe082" />
+      <stop offset="60%" stop-color="#ffb300" />
+      <stop offset="85%" stop-color="#b87300" />
+      <stop offset="100%" stop-color="#4d2c00" />
+    </radialGradient>
+
+    <!-- Drop Shadows and Glow -->
+    <filter id="cartGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.9" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1000" height="850" rx="36" fill="url(#bgGlow)" />
+
+  <g filter="url(#cartGlow)" transform="translate(30, 20)">
+
+    <!-- 1. LEFT LETTER "A" (3D Metallic Royal Blue) -->
+    <g id="letterA">
+      <path d="M 370 65 L 435 185 L 395 240 L 335 155 L 180 435 L 360 435 L 430 435 L 415 510 L 360 510 L 55 510 C 42 510, 32 495, 38 480 L 300 65 C 315 40, 350 40, 370 65 Z" fill="url(#blueMain)" stroke="#2196f3" stroke-width="2" />
+      <path d="M 300 65 L 370 65 L 335 155 L 180 435 L 110 435 L 285 95 Z" fill="url(#blueLight)" opacity="0.85" />
+      <path d="M 330 170 L 380 270 C 350 330, 300 420, 260 420 L 225 420 Z" fill="#010a18" />
+      <path d="M 370 65 L 435 185 L 405 245 L 360 170 Z" fill="url(#blueDark)" />
+      <path d="M 300 65 L 55 510 L 75 510 L 320 80 Z" fill="url(#blueEdgeGleam)" opacity="0.9" />
+    </g>
+
+    <!-- 2. SPEED WINGS ON BOTTOM LEFT (Golden Wings) -->
+    <g id="speedWings">
+      <!-- Top Wing -->
+      <path d="M 40 480 L 355 480 L 345 520 L 80 520 L 20 495 Z" fill="url(#goldWing)" />
+      <polygon points="40,480 355,480 335,492 80,492" fill="#fff9c4" opacity="0.75" />
+
+      <!-- Middle Wing -->
+      <path d="M 105 538 L 370 538 L 355 572 L 145 572 L 95 548 Z" fill="url(#goldWing)" />
+      <polygon points="105,538 370,538 345,550 145,550" fill="#fff9c4" opacity="0.75" />
+
+      <!-- Bottom Wing -->
+      <path d="M 180 598 L 385 598 L 370 630 L 215 630 L 170 608 Z" fill="url(#goldWing)" />
+      <polygon points="180,598 385,598 360,610 215,610" fill="#fff9c4" opacity="0.75" />
+    </g>
+
+    <!-- 3. SHOPPING CART BASE / BASKET FRAME -->
+    <g id="cartBasket">
+      <path d="M 350 490 L 770 490 C 810 490, 835 460, 860 380 L 895 270 L 845 285 L 815 385 C 800 425, 780 435, 745 435 L 410 435 L 395 510 L 410 510 L 745 510 C 785 510, 815 480, 835 430 L 805 440 C 785 480, 765 490, 735 490 Z" fill="url(#blueMain)" stroke="#1976d2" stroke-width="1.5" />
+      <path d="M 435 525 L 755 525 C 775 525, 785 515, 792 505 L 792 518 C 785 538, 770 545, 745 545 L 435 545 C 420 545, 410 538, 410 525 Z" fill="url(#goldDark)" />
+      <path d="M 435 530 L 745 530 C 760 530, 770 525, 775 518 L 775 528 C 768 538, 755 542, 740 542 L 435 542 Z" fill="url(#goldLight)" />
+
+      <!-- Cart Handle Top Right -->
+      <g id="cartHandle">
+        <path d="M 855 275 L 895 240 C 915 220, 955 225, 965 245 C 975 265, 955 285, 925 285 L 880 295 Z" fill="url(#goldDark)" />
+        <path d="M 865 265 L 905 235 C 920 222, 950 225, 960 240 C 965 252, 950 268, 930 268 L 890 275 Z" fill="url(#goldLight)" />
+      </g>
+    </g>
+
+    <!-- 4. CENTER & RIGHT LETTER "M" (3D Metallic Gold) -->
+    <g id="letterM">
+      <polygon points="420,185 500,430 610,480 505,185" fill="url(#goldLight)" />
+      <polygon points="420,185 505,185 610,480 580,480" fill="url(#goldGleam)" />
+      <polygon points="505,185 610,480 610,380" fill="url(#goldDark)" />
+      <path d="M 505 185 L 615 485 L 720 185 L 655 185 L 615 390 L 575 185 Z" fill="url(#goldLight)" stroke="#ffb300" stroke-width="1.5" />
+      <polygon points="615,485 720,185 860,185 770,485" fill="url(#goldLight)" />
+      <polygon points="860,185 770,485 710,485 790,240" fill="url(#goldDark)" />
+
+      <polyline points="505,185 615,485 720,185" fill="none" stroke="#fff9c4" stroke-width="4" stroke-linecap="round" />
+      <polyline points="720,185 770,485" fill="none" stroke="#fff59d" stroke-width="3" stroke-linecap="round" />
+      <polyline points="420,185 500,430" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+    </g>
+
+    <!-- 5. WHEELS (Metallic Blue Tire + Gold Hubcap) -->
+    <g id="wheelLeft" transform="translate(470, 675)">
+      <circle cx="0" cy="0" r="58" fill="#000000" opacity="0.6" />
+      <circle cx="0" cy="0" r="52" fill="url(#blueMain)" stroke="#1e88e5" stroke-width="3" />
+      <circle cx="0" cy="0" r="44" fill="#041224" />
+      <circle cx="0" cy="0" r="28" fill="url(#goldSphere)" />
+      <circle cx="-8" cy="-8" r="6" fill="#ffffff" opacity="0.8" />
+    </g>
+
+    <g id="wheelRight" transform="translate(695, 675)">
+      <circle cx="0" cy="0" r="58" fill="#000000" opacity="0.6" />
+      <circle cx="0" cy="0" r="52" fill="url(#blueMain)" stroke="#1e88e5" stroke-width="3" />
+      <circle cx="0" cy="0" r="44" fill="#041224" />
+      <circle cx="0" cy="0" r="28" fill="url(#goldSphere)" />
+      <circle cx="-8" cy="-8" r="6" fill="#ffffff" opacity="0.8" />
+    </g>
+
+  </g>
+</svg>
